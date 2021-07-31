@@ -1,0 +1,64 @@
+{
+  "name": "nem-rest-api",
+  "version": "1.0.0",
+  "description": "RESTful APIs using Express Mongodb-Driver",
+  "bin": "bin/nem-rest-api.js",
+  "main": "./src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/server.js",
+    "test:jest": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bartek-Figat/nem-rest-api.git"
+  },
+  "keywords": [
+    "express",
+    "mongodb-driver",
+    "nodejs",
+    "jest",
+    "API",
+    "prettier",
+    "jsonwebtoken",
+    "bcrypt"
+  ],
+  "author": "Bartlomiej Figatowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bartek-Figat/nem-rest-api/issues"
+  },
+  "homepage": "https://github.com/Bartek-Figat/nem-rest-api#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "lint-staged": "^11.1.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2",
+    "supertest": "^6.1.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint",
+      "prettier --write"
+    ]
+  }
+}
