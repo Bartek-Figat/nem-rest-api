@@ -1,5 +1,5 @@
 {
-  "name": "nem-rest-api",
+  "name": "nem-rest",
   "version": "1.0.0",
   "description": "RESTful APIs using Express Mongodb-Driver",
   "bin": "bin/nem-rest-api.js",

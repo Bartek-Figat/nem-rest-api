@@ -5,13 +5,13 @@
 To create a project, simply run:
 
 ```bash
-npx nem-rest-api <app-name>
+npx nem-rest <app-name>
 ```
 
 Or
 
 ```bash
-npm init nem-rest-api <app-name>
+npm init nem-rest <app-name>
 ```
 
 ## Manual Installation
@@ -21,8 +21,8 @@ If you would still prefer to do the installation manually, follow these steps:
 Clone the repo:
 
 ```bash
-git clone https://github.com/Bartek-Figat/express_mongodb_starter
-cd express_mongodb_starter
+git clone https://github.com/Bartek-Figat/nem-rest-api
+cd nem-rest
 npx rimraf ./.git
 ```
 
@@ -101,17 +101,17 @@ const { protectedRoutes } = require('../middleware/authentication');
 const userRouter = Router();
 
 userRouter.get('/detail', protectedRoutes, async (req, res) => {
-	const options = { projection: { _id: 0, password: 0 } };
-	const response = await UserService.showUser(req.user, options);
-	try {
-		res.json({ response });
-	} catch (err) {
-		res.status(500);
-	}
+  const options = { projection: { _id: 0, password: 0 } };
+  const response = await UserService.showUser(req.user, options);
+  try {
+    res.json({ response });
+  } catch (err) {
+    res.status(500);
+  }
 });
 
 module.exports = {
-	userRouter
+  userRouter,
 };
 ```
 

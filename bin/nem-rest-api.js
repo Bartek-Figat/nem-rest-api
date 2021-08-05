@@ -31,9 +31,9 @@ async function hasYarn() {
 if (process.argv.length < 3) {
   console.log('Please specify the target project directory.');
   console.log('For example:');
-  console.log('    npx nem-rest-api <appname>');
+  console.log('    npx nem-rest <appname>');
   console.log('    OR');
-  console.log('    npm init nem-rest-api <appname>');
+  console.log('    npm init nem-rest <appname>');
   process.exit(1);
 }
 
