@@ -1,106 +1,51 @@
-const util = require('util');
+#!/usr/bin/env node
+
 const path = require('path');
 const fs = require('fs');
 const { execSync } = require('child_process');
 
-// Utility functions
-const exec = util.promisify(require('child_process').exec);
-
-async function runCmd(command) {
-  try {
-    const { stdout, stderr } = await exec(command);
-    console.log(stdout);
-    console.log(stderr);
-  } catch {
-    (error) => {
-      console.log(error);
-    };
-  }
-}
-
-async function hasYarn() {
-  try {
-    await execSync('yarnpkg --version', { stdio: 'ignore' });
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-// Validate arguments
 if (process.argv.length < 3) {
-  console.log('Please specify the target project directory.');
-  console.log('For example:');
+  console.log('You have to provide a name to your app.');
+  console.log('For example :');
   console.log('    npx nem-rest <appname>');
-  console.log('    OR');
-  console.log('    npm init nem-rest <appname>');
   process.exit(1);
 }
 
-// Define constants
-const ownPath = process.cwd();
-const folderName = process.argv[2];
-const appPath = path.join(ownPath, folderName);
-const repo = 'git+https://github.com/Bartek-Figat/nem-rest-api.git';
+const projectName = process.argv[2];
+const currentPath = process.cwd();
+const projectPath = path.join(currentPath, projectName);
+let git_repo = 'https://github.com/Bartek-Figat/nem-rest-api';
 
-// Check if directory already exists
 try {
-  fs.mkdirSync(appPath);
+  fs.mkdirSync(projectPath);
 } catch (err) {
   if (err.code === 'EEXIST') {
-    console.log('Directory already exists. Please choose another name for the project.');
+    console.log(
+      `The file ${projectName} already exist in the current directory, please give it another name.`
+    );
   } else {
-    console.log(err);
+    console.log(error);
   }
   process.exit(1);
 }
 
-async function setup() {
+async function main() {
   try {
-    // Clone repo
-    console.log(`Downloading files from repo ${repo}`);
-    await runCmd(`git clone --depth 1 ${repo} ${folderName}`);
-    console.log('Cloned successfully.');
-    console.log('');
+    console.log('Downloading files...');
+    execSync(`git clone --depth 1 ${git_repo} ${projectPath}`);
 
-    // Change directory
-    process.chdir(appPath);
+    process.chdir(projectPath);
 
-    // Install dependencies
-    const useYarn = await hasYarn();
     console.log('Installing dependencies...');
-    if (useYarn) {
-      await runCmd('yarn install');
-    } else {
-      await runCmd('npm install');
-    }
-    console.log('Dependencies installed successfully.');
-    console.log();
+    execSync('npm install');
 
-    // Copy envornment variables
-    fs.copyFileSync(path.join(appPath, '.env.example'), path.join(appPath, '.env'));
-    console.log('Environment files copied.');
+    console.log('Removing useless files');
+    execSync('npx rimraf ./.git');
+    fs.rmdirSync(path.join(projectPath, 'bin'), { recursive: true });
 
-    // Delete .git folder
-    await runCmd('npx rimraf ./.git');
-    fs.unlinkSync(path.join(appPath, 'bin', 'nem.js'));
-    fs.rmdirSync(path.join(appPath, 'bin'));
-    if (!useYarn) {
-      fs.unlinkSync(path.join(appPath, 'yarn.lock'));
-    }
-
-    console.log('Installation is now complete!');
-    console.log();
-
-    console.log('We suggest that you start by typing:');
-    console.log(`    cd ${folderName}`);
-    console.log(useYarn ? '    yarn dev' : '    npm run dev');
-    console.log();
-    console.log('Enjoy');
-    console.log('Check README.md for more info.');
+    console.log('Boilerplate code is ready to use.');
   } catch (error) {
     console.log(error);
   }
 }
-
-setup();
+main();

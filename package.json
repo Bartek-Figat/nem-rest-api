@@ -1,13 +1,16 @@
 {
   "name": "nem-rest",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "RESTful APIs using Express Mongodb-Driver",
-  "bin": "bin/nem-rest-api.js",
   "main": "./src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/server.js",
+    "start": "node ./src/server.js",
     "test:jest": "jest --watchAll"
+  },
+  "bin": {
+    "nem-rest": "./bin/nem-rest-api.js"
   },
   "repository": {
     "type": "git",
