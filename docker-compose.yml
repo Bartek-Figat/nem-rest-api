@@ -5,8 +5,7 @@ services:
     container_name: backend
     restart: unless-stopped
     build:
-      context: ./src
+      context: .
       dockerfile: Dockerfile
-    command: sh -c "npm install && npm run watch"
     ports:
       - '8080:8080'
