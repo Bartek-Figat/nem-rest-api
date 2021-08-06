@@ -1,6 +1,6 @@
 {
   "name": "nem-rest",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "RESTful APIs using Express Mongodb-Driver",
   "bin": "bin/nem-rest-api.js",
   "main": "src/server.js",
