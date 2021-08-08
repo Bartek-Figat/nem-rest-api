@@ -7,8 +7,7 @@
   "scripts": {
     "watch": "nodemon /src/server.js",
     "start": "node /src/server.js",
-    "test:jest": "jest --watchAll",
-    "prepare": "husky install"
+    "test": "jest --watchAll"
   },
   "repository": {
     "type": "git",
