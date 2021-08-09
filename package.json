@@ -5,9 +5,11 @@
   "bin": "bin/nem-rest-api.js",
   "main": "src/server.js",
   "scripts": {
+    "test": "jest -i --colors --verbose --detectOpenHandles",
     "watch": "nodemon /src/server.js",
     "start": "node /src/server.js",
-    "test:dev": "jest --watchAll"
+    "test:jest": "jest --watchAll",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
